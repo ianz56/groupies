@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 session_start();
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] != '1') {
     if (!isset($_SESSION['addtr']) || $_SESSION['addtr'] != '1') {

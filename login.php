@@ -1,4 +1,6 @@
 <?php
+include_once 'dashboard/basicinfo.php';
+
 session_start();
 
 if (isset($_SESSION['username'])) {
@@ -26,7 +28,7 @@ if (isset($_SESSION['username'])) {
 <body>
   <header>
     <div class="logo">
-      <span>GroupiesSaver</span>
+      <span><?php echo NAME ?></span>
     </div>
   </header>
   <main id="login">
@@ -64,6 +66,8 @@ if (isset($_SESSION['username'])) {
       </form>
     </section>
   </main>
+  <div class="border"></div>
+  <?php include 'footer.php' ?>
   <script>
     function showPass() {
       const password = document.getElementById("password");
@@ -133,6 +137,7 @@ if (isset($_SESSION['username'])) {
       });
     }
   </script>
+
 </body>
 
 </html>

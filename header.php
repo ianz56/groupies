@@ -1,6 +1,7 @@
+<?php include 'dashboard/basicinfo.php' ?>
 <header>
   <div class="logo">
-    <span>GroupiesSaver</span>
+    <span><?php echo NAME ?></span>
     <!-- <span style="font-size: small"> | Beta</span> -->
   </div>
   <div class="profile" id="profile">
@@ -27,6 +28,32 @@
         <input type="text" name="bornplace" id="bornplace" value="<?php echo $bornplace; ?>" required />
         <label for="borndate">Tanggal Lahir:</label>
         <input type="date" name="borndate" id="borndate" value="<?php echo $borndate; ?>" required />
+        <?php
+        function displayRole($roleName, $sessionKey)
+        {
+          if (isset($_SESSION[$sessionKey]) && $_SESSION[$sessionKey] == '1') {
+            return $roleName;
+          }
+          return "";
+        }
+
+        $roles = array(
+          displayRole('Tambah Transaksi', 'addtr'),
+          displayRole('Hapus Transaksi', 'deltr'),
+          displayRole('Tambah Anggota', 'adduser'),
+          displayRole('Hapus Anggota', 'deluser')
+        );
+
+        $roles = array_filter($roles);
+
+        $rolesMessage = implode(', ', $roles);
+
+        if (!empty($rolesMessage)) {
+          echo "<div>Role: $rolesMessage</div>";
+        }
+        ?>
+
+
         <br />
         <input type="submit" value="Simpan" />
         <a class="changepassword chg-pwd-button" data-url="/dashboard/changepassword.php" href="javascript:void(0)">Ganti kata sandi</a>

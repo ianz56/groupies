@@ -19,7 +19,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 }
 
 $_SESSION['last_activity'] = time();
-
+include 'dashboard/basicinfo.php';
 include 'config/conn.php';
 $anggota_id = $_SESSION['id'];
 $query = "SELECT SUM(jumlah) AS total_saldo FROM transaksi WHERE anggota_id = $anggota_id";
@@ -159,7 +159,7 @@ $isadmin = $r['is_admin'];
 
     </section>
   </main>
-
+  <?php include 'footer.php' ?>
   <script src="js/script.js?v=1.2"></script>
 
 </body>
