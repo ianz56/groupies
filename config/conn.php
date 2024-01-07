@@ -32,3 +32,4 @@ $user = "wiperhel_groupies";
 $pass = "Ian13254.";
 $database = "wiperhel_groupies";
 $conn = new mysqli($host, $user, $pass, $database);
+$connection = new mysqli($host, $user, $pass, $database);

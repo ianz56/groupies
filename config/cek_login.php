@@ -24,8 +24,10 @@ $injeksi_username = mysqli_real_escape_string($conn, $username);
 if (!ctype_alnum($injeksi_username)) {
 	echo "Sekarang loginnya tidak bisa di injeksi lho.";
 } else {
-	$login = mysqli_query($conn, "SELECT * FROM anggota WHERE username='$username'");
-
+	$stmt = $conn->prepare("SELECT * FROM anggota WHERE username = ?");
+	$stmt->bind_param("s", $username);
+	$stmt->execute();
+	$login = $stmt->get_result();
 	if ($login) {
 		$ketemu = mysqli_num_rows($login);
 		$r      = mysqli_fetch_assoc($login);
