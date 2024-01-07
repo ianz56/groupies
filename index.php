@@ -60,7 +60,7 @@ $isadmin = $r['is_admin'];
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
   <link rel="manifest" href="/img/site.webmanifest">
-  <link rel="stylesheet" href="/css/style.css?v=1.7" />
+  <link rel="stylesheet" href="/css/style.css?v=<?php echo VERSION ?>" />
   <script src="https://kit.fontawesome.com/d1c5590ed7.js" crossorigin="anonymous"></script>
   <script src="/js/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -160,7 +160,7 @@ $isadmin = $r['is_admin'];
     </section>
   </main>
   <?php include 'footer.php' ?>
-  <script src="js/script.js?v=1.2"></script>
+  <script src="js/script.js?v=<?php echo VERSION ?>></script>
 
 </body>
 
