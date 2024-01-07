@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index</title>
+    <script src="/bersamamu/vara.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background: linear-gradient(
+          0.25turn,
+          rgb(6, 104, 104),
+          rgb(6, 104, 104)
+        );
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        /* overflow: hidden; */
+        color: black;
+      }
+      #container {
+        width: 80%;
+        margin: 20px auto;
+        min-height: 650px;
+        margin-top: 30px;
+        color: black;
+      }
+
+      button#playButton {
+        position: absolute;
+        top: 0%;
+        left: 40%;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        /* transform: translate(50%, 0); */
+      }
+      @media screen and (max-width: 400px) {
+        #container {
+          width: 100%;
+          margin: 50px auto;
+          min-height: 800px;
+        }
+      }
+      .wrapper {
+        position: fixed;
+      }
+      .box div {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        background-color: transparent;
+        border: 6px solid rgba(255, 255, 255, 0.8);
+      }
+      .box div:nth-child(1) {
+        top: 12%;
+        left: 42%;
+        animation: animate 10s linear infinite;
+      }
+      .box div:nth-child(2) {
+        top: 70%;
+        left: 50%;
+        animation: animate 7s linear infinite;
+      }
+      .box div:nth-child(3) {
+        top: 17%;
+        left: 6%;
+        animation: animate 9s linear infinite;
+      }
+      .box div:nth-child(4) {
+        top: 20%;
+        left: 60%;
+        animation: animate 10s linear infinite;
+      }
+      .box div:nth-child(5) {
+        top: 67%;
+        left: 10%;
+        animation: animate 6s linear infinite;
+      }
+      .box div:nth-child(6) {
+        top: 80%;
+        left: 70%;
+        animation: animate 12s linear infinite;
+      }
+      .box div:nth-child(7) {
+        top: 60%;
+        left: 80%;
+        animation: animate 15s linear infinite;
+      }
+      .box div:nth-child(8) {
+        top: 32%;
+        left: 25%;
+        animation: animate 16s linear infinite;
+      }
+      .box div:nth-child(9) {
+        top: 90%;
+        left: 25%;
+        animation: animate 9s linear infinite;
+      }
+      .box div:nth-child(10) {
+        top: 20%;
+        left: 80%;
+        animation: animate 5s linear infinite;
+      }
+      @keyframes animate {
+        0% {
+          transform: scale(0) translateY(0) rotate(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.3) translateY(-90px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading">Loading...</div>
+    <div id="content" style="display: none">
+      <!-- <div> -->
+      <!-- Hidden until content is fully loaded -->
+      <audio id="audioPlayer" src="/bersamamu/bersamamu.mp3"></audio>
+      <div id="container"></div>
+      <a href="" class="hidden"></a>
+      <div class="wrapper">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <button id="playButton">Putar!</button>
+      <!-- Button to start lyrics and music -->
+    </div>
+    <script>
+      $(document).ready(function () {
+        // Simulate content loading delay
+        setTimeout(function () {
+          $("#loading").hide();
+          $("#content").show();
+        }, 3000); // Adjust the delay time as needed
+
+        var fontSize = 20;
+        if (window.screen.width > 700) fontSize = 55;
+        else if (window.screen.width > 1200) fontSize = 80;
+
+        $("#playButton").on("click", function () {
+          // Play audio and start lyrics animation
+          document.getElementById("audioPlayer").play();
+
+          var vara = new Vara(
+            "#container",
+            "/bersamamu/SatisfySL.json",
+            [
+              {
+                text: "Bersamamu,",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 15000,
+                duration: 1500,
+              },
+              {
+                text: "kita akan taklukkan dunia",
+                y: 20,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 4000,
+              },
+              {
+                text: "Arungi samudra penuh rintangan",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 500,
+                duration: 4000,
+              },
+              {
+                text: "Bersamamu, kita akan jalani semua",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 2000,
+                duration: 4500,
+              },
+              {
+                text: "Jangan takut untuk melangkah bersamaku",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 2000,
+                duration: 6000,
+              },
+              {
+                text: "Bersamamu,",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 1099,
+                duration: 2500,
+              },
+              {
+                text: "ku akan dicintai dengan tulus",
+                y: 100,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 3000,
+              },
+              {
+                text: "Tanpa ragu",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 1050,
+                duration: 2500,
+              },
+              {
+                text: "'ku akan memberikan cintaku",
+                y: 100,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 3550,
+              },
+              {
+                text: "Bersamaku, kamu tak akan sendu",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 6000,
+              },
+              {
+                text: "Yakinkan kamu aku yang terbaik untukmu",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 6000,
+              },
+              {
+                text: "Bersamamu, kita 'kan jelajahi semesta",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 7500,
+                duration: 6000,
+              },
+              {
+                text: "Bertualang dengan cerita kita",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 1000,
+                duration: 6000,
+              },
+              {
+                text: "Bersamamu, kita akan berbagi semua",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 500,
+                duration: 6000,
+              },
+              {
+                text: "Segala baik dan buruk diriku",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 5500,
+              },
+              {
+                text: "'Ku tahu kau ragu",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 500,
+                duration: 3000,
+              },
+              {
+                text: "Biar 'ku beritahu padamu",
+                y: 30,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 4000,
+              },
+              {
+                text: "Bersamamu,",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 100,
+                duration: 2500,
+              },
+              {
+                text: "ku akan dicintai dengan tulus",
+                y: 100,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 3000,
+              },
+              {
+                text: "Tanpa ragu",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 1050,
+                duration: 2500,
+              },
+              {
+                text: "'ku akan memberikan cintaku",
+                y: 100,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 3550,
+              },
+              {
+                text: "Bersamaku, kamu tak akan sendu",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 6000,
+              },
+              {
+                text: "Yakinkan kamu aku yang terbaik untukmu",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 6500,
+              },
+              {
+                text: "Buka hatimu",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 4000,
+                duration: 4000,
+              },
+              {
+                text: "Segala rasa 'kan kuberikan untukmu",
+                y: 20,
+                fromCurrentPosition: { y: false },
+                delay: 1000,
+                duration: 7500,
+              },
+              {
+                text: "Bersamamu,",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 100,
+                duration: 2500,
+              },
+              {
+                text: "ku akan dicintai dengan tulus",
+                y: 100,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 3000,
+              },
+              {
+                text: "Tanpa ragu",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 1050,
+                duration: 2500,
+              },
+              {
+                text: "'ku akan memberikan cintaku",
+                y: 100,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 3550,
+              },
+              {
+                text: "Bersamaku, kamu tak akan sendu",
+                y: 70,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 6000,
+              },
+              {
+                text: "Yakinkan kamu aku yang terbaik untukmu",
+                y: 0,
+                fromCurrentPosition: { y: false },
+                delay: 0,
+                duration: 6500,
+              },
+            ],
+
+            {
+              strokeWidth: 2,
+              color: "#fff",
+              fontSize: fontSize,
+              textAlign: "center",
+            }
+          );
+          vara.ready(function () {
+            var erase = true;
+            vara.animationEnd(function (i, o) {
+              if (i == "no_erase") erase = false;
+              if (erase) {
+                o.container.style.transition = "opacity 1s 1s";
+                o.container.style.opacity = 0;
+              }
+            });
+          });
+          // Hide the button after it's clicked
+          $(this).hide();
+        });
+      });
+    </script>
+  </body>
+</html>
