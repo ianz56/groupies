@@ -160,7 +160,7 @@ $isadmin = $r['is_admin'];
     </section>
   </main>
   <?php include 'footer.php' ?>
-  <script src="js/script.js?v=<?php echo VERSION ?>></script>
+  <script src="/js/script.js?v=<?php echo VERSION ?>"></script>
 
 </body>
 

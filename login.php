@@ -89,6 +89,10 @@ if (isset($_SESSION['username'])) {
 
 
     function loginAjax() {
+      var toTop = $('html, body').animate({
+        scrollTop: 0
+      }, 'slow');
+
       const username = document.getElementsByName("username")[0].value;
       const password = document.getElementsByName("password")[0].value;
 
@@ -96,6 +100,7 @@ if (isset($_SESSION['username'])) {
       if (username.trim() === "" || password.trim() === "") {
         $("#pwd-box").fadeIn();
         $('#error-message').text("Username dan password harus diisi.")
+        toTop;
         return;
       }
       const formData = $('#login-form').serialize();
@@ -121,7 +126,7 @@ if (isset($_SESSION['username'])) {
             $("#pwd-box").fadeIn();
             errorMessage.text('Login gagal: ' + response.message);
             submitButton.text('Login');
-
+            toTop;
           }
         },
         error: function(xhr, status, error) {
@@ -129,6 +134,7 @@ if (isset($_SESSION['username'])) {
           console.error('AJAX Error: ' + status, error);
           errorMessage.text('Terjadi kesalahan saat login. Coba lagi.');
           submitButton.text('Login');
+          toTop;
         },
         complete: function() {
           // Menyembunyikan elemen loading setelah permintaan selesai (baik sukses atau gagal)
