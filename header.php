@@ -1,4 +1,4 @@
-<?php include 'dashboard/basicinfo.php' ?>
+<?php include_once 'dashboard/basicinfo.php' ?>
 <header>
   <div class="logo">
     <span><?php echo NAME ?></span>

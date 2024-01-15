@@ -380,6 +380,9 @@ main {
   text-decoration: none;
   border-radius: 20px;
 }
+.ajax-button i {
+  margin-right: 7px;
+}
 .active {
   color: var(--bg);
   background-color: var(--almostpink);

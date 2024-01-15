@@ -19,8 +19,8 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 }
 
 $_SESSION['last_activity'] = time();
-include 'dashboard/basicinfo.php';
-include 'config/conn.php';
+include_once 'dashboard/basicinfo.php';
+include_once 'config/conn.php';
 $anggota_id = $_SESSION['id'];
 $query = "SELECT SUM(jumlah) AS total_saldo FROM transaksi WHERE anggota_id = $anggota_id";
 $result = $conn->query($query);
@@ -75,7 +75,7 @@ $isadmin = $r['is_admin'];
     if (isset($_SESSION['pwd_chg']) && $_SESSION['pwd_chg'] == '0') {
 
       echo '<div id="pwd-box" class="pwd-box">';
-      echo '<p>Password belum diganti, silakan ganti <a class="chg-pwd-button" data-url="dashboard/changepassword.php" href="javascript:void(0)" >di sini</a></p>';
+      echo '<p><i class="fa-solid fa-key"></i>  Password belum diganti, silakan ganti <a class="chg-pwd-button" data-url="dashboard/changepassword.php" href="javascript:void(0)" >di sini</a></p>';
       echo '<span class="close-pwd"><i class="fa-solid fa-xmark"></i></span>';
       echo '</div>';
     }
@@ -115,22 +115,22 @@ $isadmin = $r['is_admin'];
       </div>
 
       <div class="button">
-        <a class="ajax-button" href="javascript:void(0)" data-url="/config/transaction.php">Riwayat Transaksi</a>
-        <a class="ajax-button" href="javascript:void(0)" data-url="/dashboard/memberbalance.php">Saldo Anggota</a>
+        <a class="ajax-button" href="javascript:void(0)" data-url="/config/transaction.php"><i class="fa-solid fa-clock-rotate-left"></i></i>Riwayat Transaksi</a>
+        <a class="ajax-button" href="javascript:void(0)" data-url="/dashboard/memberbalance.php"><i class="fa-solid fa-landmark"></i>Saldo Anggota</a>
         <!-- <a class="ajax-button" href="javascript:void(0)" data-url="/xendit/addtranc.php">Tambah Transaksi</a> -->
         <!-- <a class="ajax-button" href="javascript:void(0)" data-url="/bersamamu/index.html">Bersamamu - JAZ</a> -->
         <?php if (isset($_SESSION['adduser']) && $_SESSION['adduser'] == '1') {
-          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/adduser.php">Tambah Anggota</a>';
-          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/appruser.php">Terima Anggota</a>';
+          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/adduser.php"><i class="fa-solid fa-person-circle-plus"></i>Tambah Anggota</a>';
+          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/appruser.php"><i class="fa-solid fa-person-circle-question"></i>Terima Anggota</a>';
         } ?>
         <?php if (isset($_SESSION['adduser']) && $_SESSION['deluser'] == '1') {
-          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/deleteuser.php">Hapus Anggota</a>';
+          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/deleteuser.php"><i class="fa-solid fa-person-circle-minus"></i>Hapus Anggota</a>';
         } ?>
         <?php if (isset($_SESSION['adduser']) && $_SESSION['addtr'] == '1') {
-          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/addtranc.php">Tambah Transaksi</a>';
+          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/addtranc.php"><i class="fa-solid fa-dollar-sign"></i>Tambah Transaksi</a>';
         } ?>
         <?php if (isset($_SESSION['deluser']) && $_SESSION['deltr'] == '1') {
-          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/deletetranc.php">Hapus Transaksi</a>';
+          echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/deletetranc.php"><i class="fa-solid fa-circle-minus"></i>Hapus Transaksi</a>';
         } ?>
 
         <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1') {
@@ -142,7 +142,7 @@ $isadmin = $r['is_admin'];
         } ?>
 
 
-        <a class="ajax-button" href="/config/logout.php" data-url="/config/logout.php">Logout</a>
+        <a class="ajax-button" href="/config/logout.php" data-url="/config/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
       </div>
       <div id="ajax-result">
         <div id="transaction-history">
