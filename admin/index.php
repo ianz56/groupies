@@ -17,8 +17,6 @@ $_SESSION['last_activity'] = time();
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="id">
 

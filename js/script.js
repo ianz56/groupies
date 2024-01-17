@@ -21,46 +21,54 @@ $(document).ready(function () {
   function loadContent(button, loadingElement) {
     var url = button.data("url");
 
-    $(".ajax-button, .chg-pwd-button").removeClass("active");
-    button.addClass("active");
+    // Menghapus kelas 'active' dari semua tombol yang terlibat
+    $(".ajax-button, .chg-pwd-button, .ajax-button-nav").removeClass("active");
+
+    // Menambahkan kelas 'active' pada tombol yang sedang diklik
+    if (!button.hasClass("ajax-button-nav")) {
+      button.addClass("active");
+    }
+
+    // Menampilkan elemen loading
     loadingElement.show();
 
     $.ajax({
       type: "GET",
       url: url,
       success: function (response) {
+        // Memuat konten ke dalam elemen dengan ID 'transaction-history'
         $("#transaction-history").html(response);
-        loadingElement.hide();
       },
       error: function () {
         console.error("Error loading content.");
+      },
+      complete: function () {
+        // Menyembunyikan elemen loading setelah permintaan selesai (baik berhasil atau gagal)
         loadingElement.hide();
       },
     });
   }
 
-  $(".chg-pwd-button").click(function () {
+  // Menggunakan event handler untuk semua jenis tombol yang terlibat
+  $(".chg-pwd-button, .ajax-button, .ajax-button-nav").click(function () {
     loadContent($(this), $("#loading-transaction"));
   });
 
-  $(".ajax-button").click(function () {
-    loadContent($(this), $("#loading-transaction"));
+  $(".close-pwd, .changepassword").click(function () {
+    $("#pwd-box").fadeOut();
   });
 
-  $(".close-pwd").click(function () {
-    $("#pwd-box").hide();
+  $(".burger, .nav-bg, .ajax-button-nav").click(function () {
+    $(".nav-menu, nav, .nav-bg").toggleClass("nav-active");
+    $(".burger").toggleClass("toggle");
   });
 
-  $("#profile").click(function () {
-    $("#navMenu").toggle();
-  });
+  // $("#profile").click(function () {
+  //   $("#navMenu").toggle();
+  // });
 
   $("#welcome").click(function () {
     $("#navMenu").fadeIn();
-  });
-
-  $(".changepassword").click(function () {
-    $("#navMenu").fadeOut();
   });
 
   $(".CloseBtn").click(function () {

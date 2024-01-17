@@ -8,8 +8,6 @@ if (!isset($_SESSION['admin']) || ($_SESSION['admin'] != '0')) {
   exit();
 }
 
-
-
 $timeout = 600;
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout)) {
   session_unset();
@@ -19,30 +17,11 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
 }
 
 $_SESSION['last_activity'] = time();
+
 include_once 'dashboard/basicinfo.php';
 include_once 'config/conn.php';
-$anggota_id = $_SESSION['id'];
-$query = "SELECT SUM(jumlah) AS total_saldo FROM transaksi WHERE anggota_id = $anggota_id";
-$result = $conn->query($query);
-
-if ($result) {
-  $row = $result->fetch_assoc();
-  $totalSaldo = $row['total_saldo'];
-  $formattedSaldo = number_format((float) $totalSaldo, 0, ',', '.');
-} else {
-  $formattedSaldo = 'Error';
-}
-
-$userQuery = mysqli_query($conn, "SELECT * FROM anggota WHERE id='$anggota_id'");
-$r = mysqli_fetch_assoc($userQuery);
-
-$id = $r['id'];
-$username = $r['username'];
+include_once 'config/head_info.php';
 $name = $r['nama'];
-$email = $r['email'];
-$bornplace = $r['tempat_lahir'];
-$borndate = $r['tanggal_lahir'];
-$isadmin = $r['is_admin'];
 
 ?>
 

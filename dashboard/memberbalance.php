@@ -1,4 +1,13 @@
 <?php
+session_abort();
+session_start();
+if (!isset($_SESSION['admin']) || ($_SESSION['admin'] != '0')) {
+    if (isset($_SESSION['admin']) && ($_SESSION['admin'] = '1')) {
+        header("Location: /admin");
+    }
+    echo "<script>window.location = '/login.php'</script>";
+    exit();
+}
 include '../config/conn.php';
 
 // Konfigurasi pagination
