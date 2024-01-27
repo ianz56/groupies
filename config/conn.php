@@ -5,11 +5,11 @@
 // $database = "q1zsnt0bn9j95k8k";
 // $conn = new mysqli($host, $user, $pass, $database);
 
-// $host = "localhost";
-// $user = "root";
-// $pass = "";
-// $database = "groupies";
-// $conn = new mysqli($host, $user, $pass, $database);
+$host = "localhost";
+$user = "root";
+$pass = "";
+$database = "groupies";
+$conn = new mysqli($host, $user, $pass, $database);
 
 
 // $host = "sql109.infinityfree.com";

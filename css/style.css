@@ -131,6 +131,7 @@ nav {
 
 #ajax-result {
   position: relative;
+  margin-bottom: 30px;
 }
 #loading {
   display: flex;
