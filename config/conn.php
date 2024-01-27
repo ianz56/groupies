@@ -5,11 +5,11 @@
 // $database = "q1zsnt0bn9j95k8k";
 // $conn = new mysqli($host, $user, $pass, $database);
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$database = "groupies";
-$conn = new mysqli($host, $user, $pass, $database);
+// $host = "localhost";
+// $user = "root";
+// $pass = "";
+// $database = "groupies";
+// $conn = new mysqli($host, $user, $pass, $database);
 
 
 // $host = "sql109.infinityfree.com";
@@ -25,9 +25,9 @@ $conn = new mysqli($host, $user, $pass, $database);
 // $conn = new mysqli($host, $user, $pass, $database);
 
 
-// $host = "103.58.102.52";
-// $user = "wiperhel_groupies";
-// $pass = "Ian13254.";
-// $database = "wiperhel_groupies";
-// $conn = new mysqli($host, $user, $pass, $database);
-// $connection = new mysqli($host, $user, $pass, $database);
+$host = "103.58.102.52";
+$user = "wiperhel_groupies";
+$pass = "Ian13254.";
+$database = "wiperhel_groupies";
+$conn = new mysqli($host, $user, $pass, $database);
+$connection = new mysqli($host, $user, $pass, $database);

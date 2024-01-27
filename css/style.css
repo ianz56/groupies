@@ -131,7 +131,7 @@ nav {
 
 #ajax-result {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
 }
 #loading {
   display: flex;
@@ -665,7 +665,7 @@ label {
 footer {
   text-align: center;
   bottom: 0;
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
 }
 @media (max-width: 768px) {
