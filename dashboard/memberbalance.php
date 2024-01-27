@@ -39,7 +39,7 @@ $totalSaldo = $row_saldo['total_saldo'];
 $formattedSaldo = 'Rp' . number_format($totalSaldo, 0, ',', '.');
 ?>
 
-<h1>Saldo Anggota: <?php echo $formattedSaldo ?></h1>
+<h1 id="balance-total"></h1>
 <br>
 <div>
     <canvas id="transactionChart" width="300" height="300"></canvas>
@@ -86,6 +86,18 @@ $formattedSaldo = 'Rp' . number_format($totalSaldo, 0, ',', '.');
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <script>
+    $.ajax({
+        type: "GET",
+        url: "/admin/updateOptions.php?balance-total=0",
+        dataType: "json",
+        success: function(response) {
+            $("#balance-total").html("Total Saldo : " + response);
+        },
+        error: function() {
+            console.error("Error fetching updated transaction options.");
+            $("#balance-total").html("Error fetching");
+        }
+    });
     // Use AJAX to fetch data from the server
     $.ajax({
         url: "/admin/updateOptions.php?all-chart",

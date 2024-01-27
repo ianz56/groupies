@@ -52,6 +52,7 @@ $_SESSION['last_activity'] = time();
                     echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/appruser.php">Terima Anggota</a>';
                     echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/deleteuser.php">Hapus Anggota</a>';
                     echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/deletetranc.php">Hapus Transaksi</a>';
+                    echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/sync.php">Sync Total</a>';
                     echo '<a class="ajax-button" href="javascript:void(0)" data-url="/admin/role.php">Role</a>';
                     echo '<a class="ajax-button" href="javascript:void(0)" data-url="/dashboard/changepassword.php">Ganti Password</a>';
                 } ?>

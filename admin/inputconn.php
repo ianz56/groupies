@@ -17,22 +17,46 @@ if (isset($_POST['add-tranc'])) {
     $jenis_transaksi = $_POST['jenis_transaksi'];
     $keterangan = $_POST['ket'];
 
-
     // Jika jenis transaksi adalah "Penarikan", tambahkan tanda minus pada jumlah
     if ($jenis_transaksi == 'Penarikan') {
         $jumlah = -$jumlah;
     }
 
-    $query = "INSERT INTO transaksi (anggota_id, jumlah, tanggal, jenis_transaksi, keterangan) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("idsss", $anggota_id, $jumlah, $tanggal, $jenis_transaksi, $keterangan);
+    // Insert data ke tabel 'transaksi'
+    $query_transaksi = "INSERT INTO transaksi (anggota_id, jumlah, tanggal, jenis_transaksi, keterangan) VALUES (?, ?, ?, ?, ?)";
+    $stmt_transaksi = $conn->prepare($query_transaksi);
+    $stmt_transaksi->bind_param("idsss", $anggota_id, $jumlah, $tanggal, $jenis_transaksi, $keterangan);
 
-    if ($stmt->execute()) {
+    // Cek apakah transaksi berhasil dijalankan
+    if ($stmt_transaksi->execute()) {
+        // Insert data ke tabel 'member_balance_total' (asumsi tabel ini berisi total saldo anggota)
+        $query_total = "UPDATE member_balance_total SET total = ?, last_transaction = ? WHERE member_id = ?";
+        $stmt_total = $conn->prepare($query_total);
+
+        // Ambil total sebelum transaksi untuk di-update
+        $query_get_total = "SELECT total FROM member_balance_total WHERE member_id = ?";
+        $stmt_get_total = $conn->prepare($query_get_total);
+        $stmt_get_total->bind_param("i", $anggota_id);
+        $stmt_get_total->execute();
+        $stmt_get_total->bind_result($total_sebelumnya);
+        $stmt_get_total->fetch();
+
+
+        // Hitung total setelah transaksi
+        $total_setelah_transaksi = $total_sebelumnya + $jumlah;
+
+        // Update total dan last_transaction
+        $stmt_total->bind_param("dss", $total_setelah_transaksi, $tanggal, $anggota_id);
+        $stmt_get_total->close();
+        $stmt_total->execute();
         echo "Transaksi berhasil ditambahkan!";
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error: " . $stmt_transaksi->error;
     }
-    $stmt->close();
+
+    // Tutup statement
+    $stmt_transaksi->close();
+    $stmt_total->close();
 }
 
 
@@ -185,5 +209,35 @@ if (isset($_POST['user-role'])) {
     $stmt->close();
 }
 
+if (isset($_POST['sync-total'])) {
+    function syncTotalBalances($conn)
+    {
+        // Ambil nilai transaksi untuk setiap anggota dari tabel 'transaksi'
+        $query_transaksi = "SELECT anggota_id, SUM(jumlah) AS total_transaksi FROM transaksi GROUP BY anggota_id";
+        $result_transaksi = $conn->query($query_transaksi);
+
+        // Periksa jika query berhasil dijalankan
+        if ($result_transaksi) {
+            // Loop melalui hasil query
+            while ($row_transaksi = $result_transaksi->fetch_assoc()) {
+                $anggota_id = $row_transaksi['anggota_id'];
+                $total_transaksi = $row_transaksi['total_transaksi'];
+
+                // Update total pada tabel 'member_balance_total' langsung
+                $query_update_total = "UPDATE member_balance_total SET total = ? WHERE member_id = ?";
+                $stmt_update_total = $conn->prepare($query_update_total);
+                $stmt_update_total->bind_param("di", $total_transaksi, $anggota_id);
+                $stmt_update_total->execute();
+                $stmt_update_total->close();
+            }
+
+            echo "Sync berhasil dilakukan!";
+        } else {
+            echo "Sync gagal!";
+        }
+    }
+
+    syncTotalBalances($conn);
+}
 
 $conn->close();

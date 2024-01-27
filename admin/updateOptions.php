@@ -66,9 +66,10 @@ if (isset($_GET['user-pending'])) {
 if (isset($_GET['all-chart'])) {
     function getTransactionOptions($conn)
     {
-        $query_chart = "SELECT a.nama_panggilan as anggota_nama, SUM(t.jumlah) AS total_amount FROM transaksi t
-                        INNER JOIN anggota a ON t.anggota_id = a.id
-                        WHERE t.anggota_id != 1 GROUP BY t.anggota_id";
+        $query_chart = "SELECT a.nama_panggilan as anggota_nama, tt.total AS total_amount
+                FROM anggota a
+                INNER JOIN member_balance_total tt ON a.id = tt.member_id
+                WHERE a.id != 1 AND tt.total > 0";
         $result_chart = $conn->query($query_chart);
 
         $chartData = [];
@@ -87,6 +88,32 @@ if (isset($_GET['all-chart'])) {
     }
 
     $response = getTransactionOptions($conn);
+    echo json_encode($response);
+    $conn->close();
+}
+
+if (isset($_GET['balance-total'])) {
+    $member_id = intval($_GET['balance-total']);
+    function getTransactionOptions($conn, $member_id)
+    {
+        if ($member_id === 0) {
+            $query = "SELECT SUM(total) AS total FROM `member_balance_total`";
+        } else {
+            $query = "SELECT SUM(total) AS total FROM `member_balance_total` WHERE member_id = ?";
+        }
+
+        $stmt = $conn->prepare($query);
+        if ($member_id !== 0) {
+            $stmt->bind_param("i", $member_id);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $result_total = $result->fetch_assoc();
+        $data = $result_total['total'];
+        $formattedSaldo = number_format((float) $data, 0, ',', '.');
+        return $formattedSaldo;
+    }
+    $response = 'Rp' . getTransactionOptions($conn, $member_id);
     echo json_encode($response);
     $conn->close();
 }
